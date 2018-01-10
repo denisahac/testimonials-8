@@ -35,9 +35,12 @@ register_activation_hook(__FILE__, 'wpt8_activate');
 /**
  * Initizlize plugin.
  *
+ * @see includes/class-testimonial-8.php
  * @see functions.php
  */
 function wpt8_init() {
-	require_once plugin_dir_path(__FILE__) . 'functions.php';
+	require_once plugin_dir_path(__FILE__) . 'includes/class-testimonials-8.php';
+	Testimonials_8::get_instance();
+	// require_once plugin_dir_path(__FILE__) . 'functions.php';
 }
-wpt8_init();
+add_action( 'plugins_loaded', 'wpt8_init');
