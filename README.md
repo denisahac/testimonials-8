@@ -1,2 +1,2 @@
-# testimonials8
+# Testimonials 8
 A WordPress plugin.
