@@ -1,13 +1,15 @@
 <?php 
-if(!defined('WP_List_Table')) {
-	require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
-}
 
 /**
  * WP list table for listing testimonials.
  *
  * @since 1.0
  */
+
+if(!defined('WP_List_Table')) {
+	require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+}
+
 class Testimonials_8_List extends WP_List_Table {
 
 	/**

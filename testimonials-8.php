@@ -21,14 +21,18 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once plugin_dir_path(__FILE__) . 'functions.php';
+require_once plugin_dir_path(__FILE__) . 'includes/class-testimonial-8-post-type.php';
+
+$testimonial_8 = new Testimonial_8_Post_Type();
+
 /**
  * Plugin activation function.
  *
- * @see includes/class-testimonials-8-activator.php
+ * @since 1.0
  */
 function wpt8_activate() {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-testimonials-8-activator.php';
-	Testimonials_8_Activator::activate();
+	wpt8_rewrite_flush_rules();
 }
 register_activation_hook(__FILE__, 'wpt8_activate');
 
@@ -39,8 +43,8 @@ register_activation_hook(__FILE__, 'wpt8_activate');
  * @see functions.php
  */
 function wpt8_init() {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-testimonials-8.php';
-	Testimonials_8::get_instance();
-	// require_once plugin_dir_path(__FILE__) . 'functions.php';
+	// require_once plugin_dir_path(__FILE__) . 'includes/class-testimonials-8.php';
+	// Testimonials_8::get_instance();
+	require_once plugin_dir_path(__FILE__) . 'functions.php';
 }
 add_action( 'plugins_loaded', 'wpt8_init');

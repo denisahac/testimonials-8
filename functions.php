@@ -1,45 +1,31 @@
-<?php
-
-exit();
-
+<?php 
 /**
- * Construct the HTML for our top level menu.
+ * functions.php equivalent for WP plugins.
  *
  * @since 1.0
  */
-function wpt8_add_menu() {
-	// add top level menu
-	add_menu_page(
-		__('Testimonials 8', 'wpt8'),
-		__('Testimonials', 'wpt8'),
-		'manage_options',
-		'testimonials',
-		'wpt8_options_page_html',
-		'dashicons-format-quote',
-		20
-	);
-}
-add_action('admin_menu', 'wpt8_add_menu');
 
-function wpt8_options_page_html() {
-	if(!current_user_can('manage_options')) {
-		return;
-	}
-	?>
+add_theme_support('post-thumbnails', array('testimonials_8'));
 
-	<div class="wrap">
-	  <h1><?= esc_html(get_admin_page_title()); ?></h1>
-        <form action="options.php" method="post">
-            <?php
-            // output security fields for the registered setting "wporg_options"
-            settings_fields('wporg_options');
-            // output setting sections and their fields
-            // (sections are registered for "wporg", each field is registered to a specific section)
-            do_settings_sections('wporg');
-            // output save settings button
-            submit_button('Save Settings');
-            ?>
-        </form>
-	</div>
-	<?php 
+/**
+ * Flush rewrite for our custom post type.
+ * 
+ * @since 1.0
+ */
+function wpt8_rewrite_flush_rules() {
+	flush_rewrite_rules();
 }
+
+/**
+ * Custom stylesheet and javascript
+ *
+ * @since 1.0
+ */
+function wpt8_enqueu_scripts() {
+	// wp_enqueue_script('rater', plugin_dir_url(__FILE__) . 'assets/js/libs/rater.min.js', array('jquery'), '1.0', true);
+	wp_enqueue_style('rateyo', '//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css', array(), '2.3.2', 'screen');
+	wp_enqueue_script('rateyo', '//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js', array('jquery'), '2.3.2', true);
+	wp_enqueue_style('app', plugin_dir_url(__FILE__) . 'assets/css/app.css', array(), '1.0', 'screen');
+	wp_enqueue_script('app', plugin_dir_url(__FILE__) . 'assets/js/app.js', array(), '1.0', true);
+}
+add_action('admin_enqueue_scripts', 'wpt8_enqueu_scripts');

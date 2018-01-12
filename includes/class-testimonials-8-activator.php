@@ -9,28 +9,35 @@
 * @subpackage Testimonials_8/includes
 * @author     Den Isahac <den.isahac@gmail.com>
 */
+
+require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-testimonial-8-post-type.php';
+
 class Testimonials_8_Activator {
 	
 	/**
-	 * Create the database tables necessary for the plugin.
+	 * Access field for testimonial post type.
+	 * 
+	 * @since 1.0
+	 * @access private
+	 */
+	private $testimonial;
+
+	/**
+	 * Class constructor; used for class instantiation.
 	 *
 	 * @since 1.0
 	 */
-	public static function activate() {
-		global $wpdb;
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-		$charset_collate = $wpdb->get_charset_collate();
+	function __construct() {
+		$this->testimonial = new Testimonial_8_Post_Type();
+		$this->activate();
+	}
 
-		// create the `testimonials` table
-		$table_testimonials = $wpdb->prefix . 'testimonials';
-		$sql = "CREATE TABLE IF NOT EXISTS $table_testimonials (
-			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-			author VARCHAR(25) NOT NULL,
-			company VARCHAR(30),
-			testimonial VARCHAR(250) NOT NULL,
-			rating DECIMAL
-		)";
-
-		dbDelta($sql);
+	/**
+	 * Create our custom post type `testimonial`.
+	 *
+	 * @since 1.0
+	 */
+	private function activate() {
+		// $this->testimonial->flush_rewrite();
 	}
 }

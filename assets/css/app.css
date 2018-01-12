@@ -1,0 +1,13 @@
+@charset utf-8;
+
+.wpt8-textarea {
+	width: 100%;
+}
+
+.fixed .column-rating {
+	width: auto;
+}
+
+ .fixed .column-photo {
+ 		width: 44px;
+ }

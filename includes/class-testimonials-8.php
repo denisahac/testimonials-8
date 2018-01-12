@@ -19,7 +19,7 @@ require_once plugin_dir_path(__FILE__) . 'class-testimonials-8-list.php';
  	 * @since 1.0
  	 */
  	function __construct() {
- 		add_filter('set-screen-option', [__CLASS__, 'set_screen'], 10, 3)	;
+ 		add_filter('set-screen-option', [__CLASS__, 'set_screen'], 10, 3);
  		add_action('admin_menu', [$this, 'menu']);
  	}
 
@@ -61,7 +61,7 @@ require_once plugin_dir_path(__FILE__) . 'class-testimonials-8-list.php';
 
 		$option = 'per_page';
 		$args   = [
-			'label'   => __('Testimonials', 'wpt8'),
+			'label'   => __('Number of items per page', 'wpt8'),
 			'default' => 5,
 			'option'  => 'testimonials_per_page'
 		];
