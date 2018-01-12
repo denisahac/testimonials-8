@@ -85,8 +85,6 @@ class Testimonial_8_Post_Type {
 					'thumbnail'
 				),
 
-				// 'register_meta_box_cb' => 
-
 				'has_archive' => false,
 
 				'rewrite' => false,
@@ -241,8 +239,18 @@ class Testimonial_8_Post_Type {
 	 */
 	function custom_columns($column, $testimonial_id) {
 		switch ($column) {
-			case 'photo':
-				the_post_thumbnail(array(44, 44), array('class' => 'wpt8-photo'));
+			case 'photo': ?>
+
+			<a 
+				class="wpt8-photo-link"
+				href="<?php printf('%s/post.php?post=%d&action=%s', admin_url(), get_the_ID($testimonial_id), 'edit'); ?>" 
+				title="<?php the_title(); ?>"
+				aria-label="<?php printf('%s “%s”', __('Edit', 'wpt8'), trim(get_the_title())); ?>">
+				<?php the_post_thumbnail(array(44, 44), array('class' => 'wpt8-photo')); ?>
+			</a>
+
+			<?php
+				
 				break;
 
 			case 'company':
@@ -280,7 +288,11 @@ class Testimonial_8_Post_Type {
 		$columns['photo'] = __('Photo', 'wpt8');
 		$columns['title'] = __('Author', 'wpt8');
 		$columns['company'] = __('Company', 'wpt8');
-		$columns['content'] = __('Testimonial', 'wpt8');
+		
+		if($_REQUEST['mode'] == 'list' ) :
+			$columns['content'] = __('Testimonial', 'wpt8');
+		endif;
+
 		$columns['rating'] = __('Rating', 'wpt8');
 		$columns['date'] = __('Date', 'wpt8');
 
