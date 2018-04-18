@@ -16,11 +16,10 @@ class Testimonial_8_Post_Type {
 		add_action('init', [$this, 'create']);
 		add_action('add_meta_boxes_testimonial_8', [$this, 'meta_boxes']);
 		add_action('save_post', [$this, 'save_meta'], 10, 2);
-		add_filter( 'enter_title_here', [$this, 'change_title_text']);
+		add_filter('enter_title_here', [$this, 'change_title_text']);
 		add_filter('manage_testimonial_8_posts_columns', [$this, 'custom_header_columns']);
 		add_action('manage_testimonial_8_posts_custom_column', [$this, 'custom_columns'], 10, 2);
-
-		add_filter( 'manage_edit-testimonial_8_sortable_columns', [$this, 'sortable_columns']);
+		add_filter('manage_edit-testimonial_8_sortable_columns', [$this, 'sortable_columns']);
 	}
 
 	/**
@@ -289,7 +288,7 @@ class Testimonial_8_Post_Type {
 		$columns['title'] = __('Author', 'wpt8');
 		$columns['company'] = __('Company', 'wpt8');
 		
-		if($_REQUEST['mode'] == 'list' ) :
+		if(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'list' ) :
 			$columns['content'] = __('Testimonial', 'wpt8');
 		endif;
 
